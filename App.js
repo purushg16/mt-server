@@ -39,7 +39,7 @@ const upload =
             return cb("The uploaded file, isn't compatible :( we're sorry");
         }})
 
-const pythonScript = 'python/script.py';
+const pythonScript = './script.py';
 
 //Import PythonShell module.
 const {PythonShell} = require('python-shell');
@@ -91,7 +91,7 @@ app.post('/upload', upload.single('pdfFile'), (req, res) => {
         try {
             fs.unlinkSync( "./pdfs/"+ fileName );
             console.log('File deleted successfully.');
-        } catch (err){ console.error(err) }
+        } catch (err){ 'No file found.' }
     });
 
 });
