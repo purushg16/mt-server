@@ -12,6 +12,7 @@ app.use(cors());
 app.use(express.json());
 app.use(bodyParser.urlencoded({extended:true}));
 
+const PORT = process.env.PORT || 8000;
 
 const storage =
     multer.diskStorage({
@@ -95,5 +96,4 @@ app.post('/upload', upload.single('pdfFile'), (req, res) => {
 
 });
 
-const port=8000;
-app.listen(port, ()=>console.log(`Server connected to ${port}`));
+app.listen(PORT, ()=>console.log(`Server connected to ${PORT}`));
