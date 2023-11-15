@@ -13,6 +13,19 @@ import sys, os, subprocess
 # sys.path.insert(0, libs_path)
 # print(sys.path)
 
+# Create a virtual environment
+venv_path = '/path/to/your/venv'  # Replace with the desired path
+subprocess.run([sys.executable, '-m', 'venv', venv_path], check=True)
+
+# Activate the virtual environment
+activate_script = os.path.join(venv_path, 'bin', 'activate') if sys.platform != 'win32' else os.path.join(venv_path, 'Scripts', 'activate')
+subprocess.run([activate_script], shell=True, check=True)
+
+# Install required packages
+subprocess.run(['pip3', 'install', 'pdfplumber'], check=True)
+subprocess.run(["pip3", "install", "PyPDF2"], check=True)
+
+
 import PyPDF2
 import re, json 
 import Segregation
@@ -160,3 +173,4 @@ if (json.dumps(final) == '[]'):
 
 print(Segregation.segregate(final, threshold))
 os.remove(file)
+subprocess.run(['deactivate'], shell=True, check=True)
