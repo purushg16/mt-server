@@ -14,7 +14,7 @@ import sys, os, subprocess
 # print(sys.path)
 
 # Create a virtual environment
-venv_path = '/path/to/your/venv'  # Replace with the desired path
+venv_path = '/'  # Replace with the desired path
 subprocess.run([sys.executable, '-m', 'venv', venv_path], check=True)
 
 # Activate the virtual environment
