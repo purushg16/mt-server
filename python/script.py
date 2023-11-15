@@ -1,5 +1,9 @@
-import pdfplumber, re, json, sys, PyPDF2
-import os
+import sys, os
+
+libs_path = sys.path[-1]
+sys.path.insert(0, libs_path)
+
+import pdfplumber, re, json, PyPDF2
 import Segregation
 
 a = 0
