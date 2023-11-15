@@ -13,7 +13,8 @@ import sys, os, subprocess
 # sys.path.insert(0, libs_path)
 # print(sys.path)
 
-import pdfplumber, re, json, PyPDF2
+import PyPDF2
+import pdfplumber, re, json 
 import Segregation
 
 a = 0
