@@ -14,7 +14,7 @@ import sys, os, subprocess
 # print(sys.path)
 
 import PyPDF2
-import pdfplumber, re, json 
+import re, json 
 import Segregation
 
 a = 0
@@ -40,7 +40,10 @@ entry_dict = {}
 texts = []
 final = []
 
+print('Ok so far!')
+
 #  ----------- # ----------- With Breaker  ----------- #  ----------- #
+import pdfplumber
 
 def with_breaker(pdf_path):
 
