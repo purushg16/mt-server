@@ -1,9 +1,9 @@
 import sys, os
 
-directory_path = os.path.dirname(sys.path[0])
-libs_path = os.path.join( directory_path + "/.venv/lib")
-sys.path.insert(0, libs_path)
-print(sys.path)
+# directory_path = os.path.dirname(sys.path[0])
+# libs_path = os.path.join( directory_path + "/.venv/lib")
+# sys.path.insert(0, libs_path)
+# print(sys.path)
 
 import pdfplumber, re, json, PyPDF2
 import Segregation

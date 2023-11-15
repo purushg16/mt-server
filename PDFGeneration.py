@@ -178,7 +178,7 @@ def create(data, table_headings, chart_data, total_income, total_outcome, line_c
     # Build the PDF
     pdf.build(elements, onFirstPage=add_page_number, onLaterPages=add_page_number)
     
-    pdf_files = [ sys.path[1] + '/cover.pdf', pdf_path ]
+    pdf_files = [ sys.path[0] + '/cover.pdf', pdf_path ]
 
     report_dir  = 'Reports'
     os.makedirs(report_dir, exist_ok=True)

@@ -39,7 +39,7 @@ const upload =
             return cb("The uploaded file, isn't compatible :( we're sorry");
         }})
 
-const pythonScript = 'python/script.py';
+const pythonScript = './script.py';
 
 //Import PythonShell module.
 const {PythonShell} = require('python-shell');
