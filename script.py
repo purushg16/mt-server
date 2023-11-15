@@ -22,7 +22,12 @@ print(sys.path[0])
 
 # Create a virtual environment
 venv_path = sys.path[0] # Replace with the desired path
-subprocess.run([sys.executable, '-m', 'venv', venv_path], check=True)
+
+try:
+    subprocess.run(['python3', '-m', 'venv', venv_path], check=True)
+except subprocess.CalledProcessError as e:
+    print(f"Error while creating virtual environment: {e}")
+# subprocess.run([sys.executable, '-m', 'venv', venv_path], check=True)
 
 # Activate the virtual environment
 activate_script = os.path.join(venv_path, 'bin', 'activate') if sys.platform != 'win32' else os.path.join(venv_path, 'Scripts', 'activate')
