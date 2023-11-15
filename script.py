@@ -1,5 +1,12 @@
 import sys, os, subprocess
 
+
+# ['/Users/purush/PASSION/MACDASY/mt-server', 
+# '/Library/Frameworks/Python.framework/Versions/3.11/lib/python311.zip', 
+# '/Library/Frameworks/Python.framework/Versions/3.11/lib/python3.11', 
+# '/Library/Frameworks/Python.framework/Versions/3.11/lib/python3.11/lib-dynload', 
+# '/Users/purush/PASSION/MACDASY/mt-server/.venv/lib/python3.11/site-packages']
+
 # subprocess.run(["pip3", "install", "pdfplumber"])
 # subprocess.run(["pip3", "install", "PyPDF2"])
 # subprocess.run(["pip3", "install", "reportlab"])
@@ -11,10 +18,10 @@ import sys, os, subprocess
 # directory_path = os.path.dirname(sys.path[0])
 # libs_path = os.path.join( directory_path + "/.venv/lib")
 # sys.path.insert(0, libs_path)
-# print(sys.path)
+print(sys.path[0])
 
 # Create a virtual environment
-venv_path = '/'  # Replace with the desired path
+venv_path = sys.path[0] # Replace with the desired path
 subprocess.run([sys.executable, '-m', 'venv', venv_path], check=True)
 
 # Activate the virtual environment
