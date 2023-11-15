@@ -4,8 +4,7 @@ subprocess.run(["pip3", "install", "pdfplumber"])
 subprocess.run(["pip3", "install", "PyPDF2"])
 subprocess.run(["pip3", "install", "reportlab"])
 
-pdfplumber_path = '/opt/render/.local/bin'
-os.environ['PATH'] = f"{pdfplumber_path}:{os.environ['PATH']}"
+pdfplumber_path = '/opt/render/.local/bin/pdfplumber'
 subprocess.run(["pdfplumber", "--version"])
 
 
