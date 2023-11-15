@@ -1,4 +1,8 @@
-import sys, os
+import sys, os, subprocess
+
+subprocess.run(["pip3", "install", "pdfplumber"])
+subprocess.run(["pip3", "install", "PyPDF2"])
+subprocess.run(["pip3", "install", "reportlab"])
 
 # directory_path = os.path.dirname(sys.path[0])
 # libs_path = os.path.join( directory_path + "/.venv/lib")
