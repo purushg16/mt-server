@@ -1,12 +1,12 @@
 import sys, os, subprocess
 
-subprocess.run(["pip3", "install", "pdfplumber"])
-subprocess.run(["pip3", "install", "PyPDF2"])
-subprocess.run(["pip3", "install", "reportlab"])
+# subprocess.run(["pip3", "install", "pdfplumber"])
+# subprocess.run(["pip3", "install", "PyPDF2"])
+# subprocess.run(["pip3", "install", "reportlab"])
 
-pdfplumber_path = '/opt/render/.local/bin'
-os.environ['PATH'] = f"{pdfplumber_path}:{os.environ['PATH']}"
-subprocess.run(["pdfplumber", "--version"])
+# pdfplumber_path = '/opt/render/.local/bin'
+# os.environ['PATH'] = f"{pdfplumber_path}:{os.environ['PATH']}"
+# subprocess.run(["pdfplumber", "--version"])
 
 # directory_path = os.path.dirname(sys.path[0])
 # libs_path = os.path.join( directory_path + "/.venv/lib")
