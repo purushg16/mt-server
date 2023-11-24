@@ -7,7 +7,7 @@ a = 0
 file = sys.argv[1]
 password = '' if sys.argv[2] == 'null' else str(sys.argv[2])
 threshold = '' if sys.argv[4] == 'null' else str(sys.argv[4])
-
+print(sys.executable)
 
 pdf_reader = PyPDF2.PdfReader(open(file, "rb"))
 

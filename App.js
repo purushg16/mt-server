@@ -22,6 +22,9 @@ const storage =
     }
 });
 
+console.log(__dirname);
+const pythonPath = path.join(__dirname, '.venv/bin/python3')
+
 const upload =
     multer({
         storage,
@@ -59,7 +62,7 @@ app.post('/upload', upload.single('pdfFile'), (req, res) => {
 
 	let options = {
 		mode: 'text',
-        pythonPath: '/usr/bin/python3',
+        pythonPath: pythonPath,
 		pythonOptions: ['-u'], // get print results in real-time
 		args: args //An argument which can be accessed in the script using sys.argv[1]
 	};
