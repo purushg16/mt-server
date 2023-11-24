@@ -1,196 +1,155 @@
-import sys, os, subprocess
-
-
-# ['/Users/purush/PASSION/MACDASY/mt-server', 
-# '/Library/Frameworks/Python.framework/Versions/3.11/lib/python311.zip', 
-# '/Library/Frameworks/Python.framework/Versions/3.11/lib/python3.11', 
-# '/Library/Frameworks/Python.framework/Versions/3.11/lib/python3.11/lib-dynload', 
-# '/Users/purush/PASSION/MACDASY/mt-server/.venv/lib/python3.11/site-packages']
-
-# subprocess.run(["pip3", "install", "pdfplumber"])
-# subprocess.run(["pip3", "install", "PyPDF2"])
-# subprocess.run(["pip3", "install", "reportlab"])
-
-# pdfplumber_path = '/opt/render/.local/bin'
-# os.environ['PATH'] = f"{pdfplumber_path}:{os.environ['PATH']}"
-# subprocess.run(["pdfplumber", "--version"])
-
-# directory_path = os.path.dirname(sys.path[0])
-# libs_path = os.path.join( directory_path + "/.venv/lib")
-# sys.path.insert(0, libs_path)
-# print(sys.path[0])
-
-# # Create a virtual environment
-# venv_path = sys.path[0] # Replace with the desired path
-
-# try:
-#     subprocess.run(['python3', '-m', 'venv', venv_path], check=True)
-# except subprocess.CalledProcessError as e:
-#     print(f"Error while creating virtual environment: {e}")
-# # subprocess.run([sys.executable, '-m', 'venv', venv_path], check=True)
-
-# Activate the virtual environment
-# activate_script = os.path.join(venv_path, 'bin', 'activate') if sys.platform != 'win32' else os.path.join(venv_path, 'Scripts', 'activate')
-# subprocess.run([activate_script], shell=True, check=True)
-
-# # Install required packages
-# subprocess.run(['pip3', 'install', 'pdfplumber'], check=True)
-# subprocess.run(["pip3", "install", "PyPDF2"], check=True)
-
-print('ENtered!!')
-
+import sys, os
 import PyPDF2
 import re, json 
 import Segregation
 
-# a = 0
-# file = sys.argv[1]
-# password = '' if sys.argv[2] == 'null' else str(sys.argv[2])
-# threshold = '' if sys.argv[4] == 'null' else str(sys.argv[4])
+a = 0
+file = sys.argv[1]
+password = '' if sys.argv[2] == 'null' else str(sys.argv[2])
+threshold = '' if sys.argv[4] == 'null' else str(sys.argv[4])
 
 
-# pdf_reader = PyPDF2.PdfReader(open(file, "rb"))
+pdf_reader = PyPDF2.PdfReader(open(file, "rb"))
 
-# if pdf_reader.is_encrypted:
-#     pdf_reader.decrypt(password)
-#     pdf_writer = PyPDF2.PdfWriter()
+if pdf_reader.is_encrypted:
+    pdf_reader.decrypt(password)
+    pdf_writer = PyPDF2.PdfWriter()
 
-#     for page in pdf_reader.pages:
-#         pdf_writer.add_page(page)
+    for page in pdf_reader.pages:
+        pdf_writer.add_page(page)
 
-#     decrypted_file_path = "decrypted_ "+sys.argv[3]+".pdf"
-#     pdf_writer.write(open(decrypted_file_path, "wb"))
-#     file = decrypted_file_path
+    decrypted_file_path = "decrypted_ "+sys.argv[3]+".pdf"
+    pdf_writer.write(open(decrypted_file_path, "wb"))
+    file = decrypted_file_path
 
-# entry_dict = {}
-# texts = []
-# final = []
+entry_dict = {}
+texts = []
+final = []
 
-# print('Ok so far!')
+print('Ok so far!')
 
-# #  ----------- # ----------- With Breaker  ----------- #  ----------- #
-# import pdfplumber
+#  ----------- # ----------- With Breaker  ----------- #  ----------- #
+import pdfplumber
 
-# def with_breaker(pdf_path):
+def with_breaker(pdf_path):
 
-#     with pdfplumber.open(pdf_path) as pdf:
-#         tables = []
+    with pdfplumber.open(pdf_path) as pdf:
+        tables = []
 
-#         for page in pdf.pages:
-#             table_data = []
-#             rows = page.extract_table()
-#             if rows:
-#                 table_data.extend(rows)
+        for page in pdf.pages:
+            table_data = []
+            rows = page.extract_table()
+            if rows:
+                table_data.extend(rows)
 
-#             tables.extend(table_data)
+            tables.extend(table_data)
 
-#         headers = tables[0]
-#         table_data = []
-#         for row in tables[1:]:
-#             row_dict = {}
-#             for col, val in enumerate(row):
-#                 if val == "":
-#                     row_dict[headers[col]] = None
-#                 else:
-#                     row_dict[headers[col]] = val
-#             table_data.append(row_dict)
+        headers = tables[0]
+        table_data = []
+        for row in tables[1:]:
+            row_dict = {}
+            for col, val in enumerate(row):
+                if val == "":
+                    row_dict[headers[col]] = None
+                else:
+                    row_dict[headers[col]] = val
+            table_data.append(row_dict)
 
-#         return table_data
+        return table_data
     
 
-# #  ----------- # ----------- Without Breaker  ----------- #  ----------- #
+#  ----------- # ----------- Without Breaker  ----------- #  ----------- #
 
 
-# def returnValue(value, p_no):  
-#         global texts
+def returnValue(value, p_no):  
+        global texts
         
-#         p = pdf.pages[p_no]
-#         raw_text1 = p.extract_words()
-#         rvalue = [item for item in raw_text1 if item.get('text') == value]
+        p = pdf.pages[p_no]
+        raw_text1 = p.extract_words()
+        rvalue = [item for item in raw_text1 if item.get('text') == value]
 
-#         if(len(rvalue) > 1):
+        if(len(rvalue) > 1):
             
-#             if len(texts) == 0 and value not in texts:
-#                 texts.append(value)
+            if len(texts) == 0 and value not in texts:
+                texts.append(value)
                 
-#             elif len(texts) != 0 and value in texts:
-#                 texts.append(value)
+            elif len(texts) != 0 and value in texts:
+                texts.append(value)
 
-#             elif len(texts) !=0 and value not in texts:
-#                 texts = []
-#                 texts.append(value)
+            elif len(texts) !=0 and value not in texts:
+                texts = []
+                texts.append(value)
 
-#             return [rvalue[len(texts)-1]]
+            return [rvalue[len(texts)-1]]
         
-#         elif rvalue != []:
-#                 texts = []
-#                 return [item for item in raw_text1 if item.get('text') == value]
+        elif rvalue != []:
+                texts = []
+                return [item for item in raw_text1 if item.get('text') == value]
 
 
-# with pdfplumber.open(file) as pdf:
-#     for page_num in range(len(pdf.pages)):
-#         # print(page_num)
+with pdfplumber.open(file) as pdf:
+    for page_num in range(len(pdf.pages)):
+        # print(page_num)
     
-#         page = pdf.pages[page_num]
-#         text = page.extract_text()
-#         raw_text = page.extract_words()
+        page = pdf.pages[page_num]
+        text = page.extract_text()
+        raw_text = page.extract_words()
 
-#         new_line = re.compile(r"(\b\d{2}/\d{2}/\d{2}\b) ([a-zA-Z0-9\-@#*/.]+)\s+([a-zA-Z0-9]+)\s+(\b\d{2}/\d{2}/\d{2}\b) (?:(\s |[\d,]+\.\d{2})) ?(?:(\s |[\d,]+\.\d{2}))?\s([\d,]+\.\d{2})")
-#         second_line = re.compile(r"([a-zA-Z0-9\-@#*/.]+)")
-#         decimal = re.compile("[\d,]+\.\d{2}")
+        new_line = re.compile(r"(\b\d{2}/\d{2}/\d{2}\b) ([a-zA-Z0-9\-@#*/.]+)\s+([a-zA-Z0-9]+)\s+(\b\d{2}/\d{2}/\d{2}\b) (?:(\s |[\d,]+\.\d{2})) ?(?:(\s |[\d,]+\.\d{2}))?\s([\d,]+\.\d{2})")
+        second_line = re.compile(r"([a-zA-Z0-9\-@#*/.]+)")
+        decimal = re.compile("[\d,]+\.\d{2}")
 
-#         combined_text = ''
-#         condition_met = False
-#         line_num  = 0
+        combined_text = ''
+        condition_met = False
+        line_num  = 0
 
-#         for line in text.split('\n'):
+        for line in text.split('\n'):
 
-#             if not condition_met:
-#                 condition_met = new_line.match(line)
+            if not condition_met:
+                condition_met = new_line.match(line)
 
-#             if(condition_met):
-#                 if not (decimal.match(line.split(' ')[-1])):
-#                         line_num+=1
-#                         cod1 = bool(re.search(r"\s", line))
-#                         if not cod1:
-#                             combined_text += f' {line}'
+            if(condition_met):
+                if not (decimal.match(line.split(' ')[-1])):
+                        line_num+=1
+                        cod1 = bool(re.search(r"\s", line))
+                        if not cod1:
+                            combined_text += f' {line}'
                 
-#                 else:
-#                         if new_line.match(line):
-#                             combined_text += f'\n{line}'
+                else:
+                        if new_line.match(line):
+                            combined_text += f'\n{line}'
                     
-#         found = None
-#         for line in combined_text.split('\n'):
-#             trimmed = line.split(' ')[:7]
-#             # print(line.split(' ')[:7])
+        found = None
+        for line in combined_text.split('\n'):
+            trimmed = line.split(' ')[:7]
+            # print(line.split(' ')[:7])
 
-#             if len(trimmed) != 6:
-#               if len(trimmed) == 7: trimmed = line.split(' ')[:8]  
-#               elif len(trimmed) > 7: trimmed = line.split(' ')[:9]
+            if len(trimmed) != 6:
+              if len(trimmed) == 7: trimmed = line.split(' ')[:8]  
+              elif len(trimmed) > 7: trimmed = line.split(' ')[:9]
 
 
-#             if(len(trimmed) > 1):
+            if(len(trimmed) > 1):
                 
-#                 entry = trimmed
-#                 entry_dict['Date'] = entry[0]
+                entry = trimmed
+                entry_dict['Date'] = entry[0]
                 
-#                 remaining_desc = entry[1] + entry[-1] if len(entry) == 7 else entry[1] + entry[-2] + entry[-1] if len(entry) > 7 else entry[1]
-#                 entry_dict['Description'] = remaining_desc
-#                 found = returnValue(entry[4], page_num)
-#                 pos = found[0]['x1']
-#                 text = found[0]['text']
-#                 entry_dict['Amount'] = text.replace(",", "")
+                remaining_desc = entry[1] + entry[-1] if len(entry) == 7 else entry[1] + entry[-2] + entry[-1] if len(entry) > 7 else entry[1]
+                entry_dict['Description'] = remaining_desc
+                found = returnValue(entry[4], page_num)
+                pos = found[0]['x1']
+                text = found[0]['text']
+                entry_dict['Amount'] = text.replace(",", "")
                 
-#                 if pos == 548.187: entry_dict['Type'] = 'CR'
-#                 elif pos == 470.235: entry_dict['Type'] = 'DR'
+                if pos == 548.187: entry_dict['Type'] = 'CR'
+                elif pos == 470.235: entry_dict['Type'] = 'DR'
 
-#                 entry_dict['Closing Balance'] = entry[5].replace(",", "")
+                entry_dict['Closing Balance'] = entry[5].replace(",", "")
 
-#                 final.append(entry_dict.copy())
+                final.append(entry_dict.copy())
 
-# if (json.dumps(final) == '[]'):
-#     final = with_breaker(file)
+if (json.dumps(final) == '[]'):
+    final = with_breaker(file)
 
-# print(Segregation.segregate(final, threshold))
-# os.remove(file)
-# # subprocess.run(['deactivate'], shell=True, check=True)
+print(Segregation.segregate(final, threshold))
+os.remove(file)
