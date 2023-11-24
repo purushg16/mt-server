@@ -23,7 +23,7 @@ const storage =
 });
 
 console.log(__dirname);
-const pythonPath = '/.local/lib/python3'
+const pythonPath = '/opt/render/.local/lib/python3'
 // const pythonPath = path.join(__dirname, 'usr/bin/python3')
 // /opt/render/.local/lib/python3.7/site-packages
 // /usr/bin/python3
