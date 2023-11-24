@@ -23,8 +23,8 @@ const storage =
 });
 
 console.log(__dirname);
-const pythonPath = '/bin/python3'
-// const pythonPath = path.join(__dirname, '/usr/bin/python3')
+const pythonPath = '/usr/bin/python3'
+// const pythonPath = path.join(__dirname, 'usr/bin/python3')
 
 const upload =
     multer({
