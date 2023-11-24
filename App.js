@@ -27,6 +27,7 @@ const pythonPath = '/.local/bin/python3'
 // const pythonPath = '/.venv/bin/python3'
 // const pythonPath = path.join(__dirname, 'usr/bin/python3')
 // /opt/render/.local/lib/python3.7/site-packages
+// /opt/render/project/src
 // /usr/bin/python3
 // /.venv/bin/python3
 
@@ -67,7 +68,7 @@ app.post('/upload', upload.single('pdfFile'), (req, res) => {
 
 	let options = {
 		mode: 'text',
-        pythonPath: pythonPath,
+        // pythonPath: pythonPath,
 		pythonOptions: ['-u'], // get print results in real-time
 		args: args //An argument which can be accessed in the script using sys.argv[1]
 	};

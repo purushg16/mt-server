@@ -3,6 +3,8 @@ import PyPDF2
 import re, json 
 import Segregation
 
+print(os.getcwd())
+
 a = 0
 file = sys.argv[1]
 password = '' if sys.argv[2] == 'null' else str(sys.argv[2])
