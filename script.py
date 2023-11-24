@@ -39,9 +39,9 @@ import sys, os, subprocess
 
 print('ENtered!!')
 
-# import PyPDF2
-# import re, json 
-# import Segregation
+import PyPDF2
+import re, json 
+import Segregation
 
 # a = 0
 # file = sys.argv[1]
