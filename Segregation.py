@@ -99,7 +99,8 @@ def segregate(data, threshold):
             new_hvt = [ date, desc, amount if type == 'CR' else '-', amount if type == 'DR' else '-' ]
             hvt_list.append(new_hvt)
 
-    
+    print(data)
+    # print(result)
     # Unusual Transaction    
     date = ''
     decs = set()
@@ -111,6 +112,8 @@ def segregate(data, threshold):
 
     for d in result:
         current_date = d['DATE']
+        if(current_date == '20/06/23') : print(d)
+
         current_desc = d['DESCRIPTION']
         current_amount = d['AMOUNT']
         current_type = d['TYPE']

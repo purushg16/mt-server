@@ -18,24 +18,24 @@ import sys, os, subprocess
 # directory_path = os.path.dirname(sys.path[0])
 # libs_path = os.path.join( directory_path + "/.venv/lib")
 # sys.path.insert(0, libs_path)
-print(sys.path[0])
+# print(sys.path[0])
 
-# Create a virtual environment
-venv_path = sys.path[0] # Replace with the desired path
+# # Create a virtual environment
+# venv_path = sys.path[0] # Replace with the desired path
 
-try:
-    subprocess.run(['python3', '-m', 'venv', venv_path], check=True)
-except subprocess.CalledProcessError as e:
-    print(f"Error while creating virtual environment: {e}")
-# subprocess.run([sys.executable, '-m', 'venv', venv_path], check=True)
+# try:
+#     subprocess.run(['python3', '-m', 'venv', venv_path], check=True)
+# except subprocess.CalledProcessError as e:
+#     print(f"Error while creating virtual environment: {e}")
+# # subprocess.run([sys.executable, '-m', 'venv', venv_path], check=True)
 
 # Activate the virtual environment
-activate_script = os.path.join(venv_path, 'bin', 'activate') if sys.platform != 'win32' else os.path.join(venv_path, 'Scripts', 'activate')
-subprocess.run([activate_script], shell=True, check=True)
+# activate_script = os.path.join(venv_path, 'bin', 'activate') if sys.platform != 'win32' else os.path.join(venv_path, 'Scripts', 'activate')
+# subprocess.run([activate_script], shell=True, check=True)
 
-# Install required packages
-subprocess.run(['pip3', 'install', 'pdfplumber'], check=True)
-subprocess.run(["pip3", "install", "PyPDF2"], check=True)
+# # Install required packages
+# subprocess.run(['pip3', 'install', 'pdfplumber'], check=True)
+# subprocess.run(["pip3", "install", "PyPDF2"], check=True)
 
 
 import PyPDF2
@@ -159,15 +159,22 @@ with pdfplumber.open(file) as pdf:
                             combined_text += f'\n{line}'
                     
         found = None
-        for line in combined_text.split('\n') :
+        for line in combined_text.split('\n'):
             trimmed = line.split(' ')[:7]
+            # print(line.split(' ')[:7])
+
+            if len(trimmed) != 6:
+              if len(trimmed) == 7: trimmed = line.split(' ')[:8]  
+              elif len(trimmed) > 7: trimmed = line.split(' ')[:9]
+
 
             if(len(trimmed) > 1):
                 
                 entry = trimmed
                 entry_dict['Date'] = entry[0]
-                entry_dict['Description'] = entry[1] + entry[-1] if len(entry) == 7 else entry[1]
-
+                
+                remaining_desc = entry[1] + entry[-1] if len(entry) == 7 else entry[1] + entry[-2] + entry[-1] if len(entry) > 7 else entry[1]
+                entry_dict['Description'] = remaining_desc
                 found = returnValue(entry[4], page_num)
                 pos = found[0]['x1']
                 text = found[0]['text']
@@ -185,4 +192,4 @@ if (json.dumps(final) == '[]'):
 
 print(Segregation.segregate(final, threshold))
 os.remove(file)
-subprocess.run(['deactivate'], shell=True, check=True)
+# subprocess.run(['deactivate'], shell=True, check=True)
