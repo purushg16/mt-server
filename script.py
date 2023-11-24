@@ -1,9 +1,11 @@
+
+print(os.getcwd())
+
 import sys, os
 import PyPDF2
 import re, json 
 import Segregation
 
-print(os.getcwd())
 
 a = 0
 file = sys.argv[1]
