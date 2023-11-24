@@ -1,7 +1,6 @@
-
+import sys, os
 print(os.getcwd())
 
-import sys, os
 import PyPDF2
 import re, json 
 import Segregation
