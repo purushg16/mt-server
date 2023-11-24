@@ -37,6 +37,7 @@ import sys, os, subprocess
 # subprocess.run(['pip3', 'install', 'pdfplumber'], check=True)
 # subprocess.run(["pip3", "install", "PyPDF2"], check=True)
 
+print('ENtered!!')
 
 import PyPDF2
 import re, json 

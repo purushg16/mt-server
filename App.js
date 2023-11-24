@@ -59,6 +59,7 @@ app.post('/upload', upload.single('pdfFile'), (req, res) => {
 
 	let options = {
 		mode: 'text',
+        pythonPath: '/usr/bin/python3',
 		pythonOptions: ['-u'], // get print results in real-time
 		args: args //An argument which can be accessed in the script using sys.argv[1]
 	};
