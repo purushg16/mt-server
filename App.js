@@ -22,12 +22,14 @@ const storage =
     }
 });
 
-console.log(__dirname);
-const pythonPath = '/.local/bin/python3'
+console.log( 'NodePath: ', __dirname);
+// const pythonPath = '/.local/bin/python3'
 // const pythonPath = '/.venv/bin/python3'
-// const pythonPath = path.join(__dirname, 'usr/bin/python3')
+
 // /opt/render/.local/lib/python3.7/site-packages
+const pythonPath = path.join(__dirname, '/.local/bin/python3')
 // /opt/render/project/src
+
 // /usr/bin/python3
 // /.venv/bin/python3
 
@@ -49,6 +51,27 @@ const upload =
         }})
 
 const pythonScript = './script.py';
+
+const { exec } = require('child_process');
+
+// Command to install a Python package using pip
+const pythonPackage = 'PyPDF2 reportlab pdfplumber'; // Replace with the Python package you want to install
+
+// Execute pip command
+const installPythonPackage = exec(`pip3 install ${pythonPackage}`, (error, stdout, stderr) => {
+  if (error) {
+    console.error(`Error installing Python package: ${error.message}`);
+    return;
+  }
+  if (stderr) {
+    console.error(`Installation error: ${stderr}`);
+    return;
+  }
+  console.log(`Python package ${pythonPackage} installed successfully: ${stdout}`);
+});
+
+installPythonPackage.stdin.end(); // Close the standard input (if not needed)
+
 
 //Import PythonShell module.
 const {PythonShell} = require('python-shell');
@@ -77,10 +100,15 @@ app.post('/upload', upload.single('pdfFile'), (req, res) => {
     const pythonShell = new PythonShell(pythonScript, options);
 
     // Handle the output from the Python script
-    pythonShell.on('message', (message) => { console.log(message); });
+    pythonShell.on('message', (message) => {
+        console.log('Python Output:', message);
+    });
 
     // Handle errors (if any)
-    pythonShell.on('error', (err) => { console.error('Python script error:', err) });
+    pythonShell.on('error', (err) => { 
+        res.status(400).send('Some error! Try again Later!'); 
+        console.error('Python script error:', err) 
+    });
 
     // End the PythonShell instance
     pythonShell.end((err) => {
